@@ -1,0 +1,58 @@
+Rangkuman Mobile
+
+Pertama-tama saya akan menjelaskan bagaimana project mobile saya bisa terhubung ke database dan menampilkan data.
+
+Di dalam backend, saya membuat file koneksi.php.
+Fungsinya adalah untuk menghubungkan program ke database MySQL.
+Jadi semua file API seperti addData, editData, deleteData, dan lainnya akan memakai koneksi tersebut untuk memproses data.
+
+Di project saya, saya membuat beberapa file API, yaitu:
+
+addData.php - untuk menambahkan data.
+editData.php - untuk mengedit data.
+deleteData.php - untuk menghapus data.
+showData.php - untuk menampilkan data.
+auth.php & login.php - untuk proses login.
+
+
+addData (Menambah Data)
+Fungsinya untuk menambahkan data baru ke database.
+Cara kerjanya:
+Dari sisi client (halaman Tab2Page.vue), user memasukkan data di form.
+Setelah user menekan tombol Tambah, data tersebut dikirim ke API addData.php.
+Api addData akan memproses data itu dan memasukkannya ke database.
+Setelah berhasil, data baru akan muncul ketika user membuka halaman list barang.
+
+editData (Mengedit Data)
+Fungsinya untuk mengubah data yang sudah ada.
+Cara kerjanya:
+User memilih data yang mau diedit, dengan menekan tombol Edit.
+Data yang dipilih akan dipanggil dari database berdasarkan id.
+Setelah itu halaman edit menampilkan data tersebut supaya user bisa mengubahnya.
+Ketika user menyimpan perubahan, data baru dikirim lagi ke API editData.php.
+API akan memperbarui data tersebut di database.
+Alurnya sederhananya:
+Database - Client (untuk ditampilkan)
+Client - Database (untuk disimpan lagi)
+
+deleteData (Menghapus Data)
+Fungsinya menghapus data dari database.
+Cara kerjanya:
+Di halaman list barang, user menekan tombol Delete pada data yang ingin dihapus.
+Client lalu mengirim id barang ke API deleteData.php.
+API menghapus data berdasarkan id tersebut.
+Setelah berhasil, barang itu tidak muncul lagi di list.
+
+showData (Menampilkan Data)
+Fungsinya mengambil seluruh data barang dari database.
+Cara kerjanya:
+Saat halaman list dibuka (Tab1Page.vue), frontend mengirim request ke showData.php.
+API mengambil semua data di database dan mengirimnya ke client dalam bentuk JSON.
+Lalu aplikasi akan menampilkan data dalam bentuk list.
+
+auth.php / login.php (Proses Login)
+Fungsinya untuk login sebelum masuk ke aplikasi.
+Cara kerjanya:
+User memasukkan secret code atau email/password.
+User login menggunakan kode rahasia. Jika kode benar, server membuat session dan user dianggap berhasil login.
+Setelah login, sistem membuat session untuk menyimpan status user. Setiap request POST wajib memakai CSRF token supaya lebih aman.
